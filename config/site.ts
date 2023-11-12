@@ -5,20 +5,16 @@ export const siteConfig = {
 	description: "Invest in your knowledge",
 	navItems: [
 		{
-			label: "Home",
-			href: "/",
+			label: "Courses",
+			href: "/courses",
 		},
 		{
-			label: "Docs",
-			href: "/docs",
+			label: "eBooks",
+			href: "/eBooks",
 		},
 		{
 			label: "Pricing",
 			href: "/pricing",
-		},
-		{
-			label: "Blog",
-			href: "/blog",
 		},
 		{
 			label: "About",
@@ -27,24 +23,20 @@ export const siteConfig = {
 	],
 	navMenuItems: [
 		{
-			label: "Profile",
-			href: "/profile",
+			label: "Courses",
+			href: "/courses",
 		},
 		{
-			label: "Dashboard",
-			href: "/dashboard",
+			label: "eBooks",
+			href: "/eBooks",
 		},
 		{
-			label: "Projects",
-			href: "/projects",
+			label: "Pricing",
+			href: "/pricing",
 		},
 		{
-			label: "Team",
-			href: "/team",
-		},
-		{
-			label: "Calendar",
-			href: "/calendar",
+			label: "About",
+			href: "/about",
 		},
 		{
 			label: "Settings",
