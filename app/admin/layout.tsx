@@ -1,6 +1,8 @@
 import { Navlink } from '@/components/shared/nav-link'
 import { Navbar } from '@/components/widgets/navbar'
 
+export const dynamic = 'force-dynamic'
+
 export default function AdminLayout({
   children,
 }: Readonly<{
