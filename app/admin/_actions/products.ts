@@ -2,7 +2,7 @@
 
 import prisma from '@/db/prisma'
 import { transformObject } from '@/lib/utils'
-import { redirect } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const schema = z.object({
@@ -25,7 +25,7 @@ export async function addProduct(prevState: unknown, formData: FormData) {
 
   const data = result.data
 
-  prisma.product.create({
+  await prisma.product.create({
     data: {
       name: data.name,
       description: data.description,
@@ -37,4 +37,16 @@ export async function addProduct(prevState: unknown, formData: FormData) {
   })
 
   redirect('/admin/products')
+}
+
+export async function toggleProductAvailability(id: string, isAvailableForPurchase: boolean) {
+  await prisma.product.update({
+    where: { id },
+    data: { isAvailableForPurchase },
+  })
+}
+
+export async function deleteProduct(id: string) {
+  const product = await prisma.product.delete({ where: { id } })
+  if (product == null) return notFound()
 }
