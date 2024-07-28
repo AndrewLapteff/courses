@@ -3,17 +3,22 @@
 import { Label } from '@/components/ui/label'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { addProduct } from '../../_actions/products'
+import { addProduct, updateProduct } from '../../_actions/products'
 import { useFormState, useFormStatus } from 'react-dom'
+import { Product } from '@prisma/client'
 
-export default function ProductForm() {
-  const [error, action] = useFormState(addProduct, {})
+export default function ProductForm({ product }: { product?: Product | null }) {
+  const [error, action] = useFormState(
+    product == null ? addProduct : updateProduct.bind(null, product.id),
+    {}
+  )
 
   return (
     <form action={action} className="space-y-4">
       <div>
         <Label htmlFor="name">Name</Label>
         <Input
+          defaultValue={product?.name || ''}
           type="text"
           name="name"
           id="name"
@@ -24,6 +29,7 @@ export default function ProductForm() {
       <div>
         <Label htmlFor="price">Price</Label>
         <Input
+          defaultValue={product?.priceInDollars || ''}
           type="text"
           name="priceInDollars"
           id="price"
@@ -34,6 +40,7 @@ export default function ProductForm() {
       <div>
         <Label htmlFor="description">Description</Label>
         <textarea
+          defaultValue={product?.description || ''}
           id="description"
           name="description"
           rows={4}
@@ -44,6 +51,7 @@ export default function ProductForm() {
       <div>
         <Label htmlFor="file">File</Label>
         <Input
+          defaultValue={product?.filePath || ''}
           type="text"
           name="filePath"
           id="file"
@@ -54,6 +62,7 @@ export default function ProductForm() {
       <div>
         <Label htmlFor="image">Image</Label>
         <Input
+          defaultValue={product?.imagePath || ''}
           type="text"
           name="imagePath"
           id="image"

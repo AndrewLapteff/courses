@@ -17,6 +17,29 @@ const schema = z.object({
     .optional(),
 })
 
+export async function updateProduct(id: string, prevState: unknown, formData: FormData) {
+  const result = schema.safeParse(transformObject(formData))
+  if (result.success === false) {
+    return result.error.formErrors.fieldErrors
+  }
+
+  const data = result.data
+
+  await prisma.product.update({
+    where: { id },
+    data: {
+      name: data.name,
+      description: data.description,
+      priceInDollars: data.priceInDollars,
+      filePath: data.filePath,
+      imagePath: data.imagePath,
+      isAvailableForPurchase: data.isAvailableForPurchase === 'on',
+    },
+  })
+
+  redirect('/admin/products')
+}
+
 export async function addProduct(prevState: unknown, formData: FormData) {
   const result = schema.safeParse(transformObject(formData))
   if (result.success === false) {
