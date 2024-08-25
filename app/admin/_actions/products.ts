@@ -2,6 +2,7 @@
 
 import prisma from '@/db/prisma'
 import { transformObject } from '@/lib/utils'
+import { revalidatePath } from 'next/cache'
 import { notFound, redirect } from 'next/navigation'
 import { z } from 'zod'
 
@@ -37,6 +38,9 @@ export async function updateProduct(id: string, prevState: unknown, formData: Fo
     },
   })
 
+  revalidatePath('/')
+  revalidatePath('/products')
+
   redirect('/admin/products')
 }
 
@@ -59,6 +63,9 @@ export async function addProduct(prevState: unknown, formData: FormData) {
     },
   })
 
+  revalidatePath('/')
+  revalidatePath('/products')
+
   redirect('/admin/products')
 }
 
@@ -67,9 +74,15 @@ export async function toggleProductAvailability(id: string, isAvailableForPurcha
     where: { id },
     data: { isAvailableForPurchase },
   })
+
+  revalidatePath('/')
+  revalidatePath('/products')
 }
 
 export async function deleteProduct(id: string) {
   const product = await prisma.product.delete({ where: { id } })
   if (product == null) return notFound()
+
+  revalidatePath('/')
+  revalidatePath('/products')
 }
