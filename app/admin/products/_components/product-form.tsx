@@ -77,6 +77,7 @@ export default function ProductForm({ product }: { product?: Product | null }) {
           name="isAvailableForPurchase"
           id="available-for-purchase"
           className="mt-1 block"
+          checked={product?.isAvailableForPurchase}
         />
         {error.isAvailableForPurchase && (
           <p className="text-destructive">{error.isAvailableForPurchase}</p>

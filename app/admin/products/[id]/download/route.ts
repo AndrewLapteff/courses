@@ -9,6 +9,6 @@ export async function GET(req: NextRequest, { params: { id } }: { params: { id: 
   })
 
   if (product == null) return notFound()
-    
-  return new NextResponse()
+
+  return NextResponse.redirect(product.filePath, { status: 300 })
 }

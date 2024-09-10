@@ -46,7 +46,6 @@ export default async function ProductsTable() {
           <TableHead>Name</TableHead>
           <TableHead>Price</TableHead>
           <TableHead>Orders</TableHead>
-          <TableHead>Name</TableHead>
           <TableHead className="w-0">
             <span className="sr-only">Available For Purchase</span>
           </TableHead>
@@ -71,7 +70,6 @@ export default async function ProductsTable() {
             <TableCell>{product.name}</TableCell>
             <TableCell>{formatCurrency(product.priceInDollars)}</TableCell>
             <TableCell>{formatNumber(product._count.orders)}</TableCell>
-            <TableCell>{product.filePath}</TableCell>
             <TableCell>
               <DropdownMenu>
                 <DropdownMenuTrigger>
@@ -80,7 +78,7 @@ export default async function ProductsTable() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem asChild>
-                    <a download href={`/admin/products/${product.id}/download`}>
+                    <a download href={product.filePath}>
                       Download
                     </a>
                   </DropdownMenuItem>

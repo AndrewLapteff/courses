@@ -26,7 +26,7 @@ export function ProductCard({
       </div>
       <CardHeader>
         <CardTitle>{name}</CardTitle>
-        <CardDescription>{formatCurrency(priceInDollars / 100)}</CardDescription>
+        <CardDescription>{formatCurrency(priceInDollars)}</CardDescription>
       </CardHeader>
       <CardContent className="flex-grow">
         <p className="line-clamp-4">{description}</p>
